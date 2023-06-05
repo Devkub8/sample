@@ -34,26 +34,18 @@ jobs:
                 with: 
                  path: ~/.npm
                  key: cachemodule-${{ hashFiles('**/package.-lock.json') }}  
-              
-              - name: Install nvm
-                run: |
-                 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh 
-                 sh install.sh
-
-              - name: Use Node.js
-                run: nvm install 14
-
+          
+             
               - name: Setup Node.js
                 uses: actions/setup-node@v2
                 with: 
-                      node-version: 14
+                        node-version: 14
               - name: Install Dependencies
                 run: npm install 
-
+                      
+              - name: Build the app
+                run: npm run build
                
-              # - name: Build the app
-              #   run: npm run build
-
               - name: NPM start
                 run: npm start
               - run: echo "Build Successful"
@@ -85,24 +77,17 @@ jobs:
                with: 
                     path: ~/.npm
                     key: cachemodule-${{ hashFiles('**/package.-lock.json') }}
-             
-             - name: Installing nvm
-               run: nvm install 16.15.1
-            
-             - name: Installing cross-env npm
-               run: npm install cross-env
+         
              - name: Setup Node.js
                uses: actions/setup-node@v2
                with: 
                       node-version: 14
-            #  - name: Install Dependencies
-            #    run: npm install 
-
-             - name: Install React
-               run: npm i react-scripts
-                  
-            #  - name: Build the app
-            #    run: npm run build
+             - name: Install Dependencies
+               run: npm install 
+                    
+             - name: Build the app
+               run: npm run build
+             
              - name: NPM start
                run: npm start
     
