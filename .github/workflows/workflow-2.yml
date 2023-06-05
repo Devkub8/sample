@@ -35,12 +35,16 @@ jobs:
                  path: ~/.npm
                  key: cachemodule-${{ hashFiles('**/package.-lock.json') }}  
               
-              - name: Installing nvm
-                run: nvm install 16.15.1
-              
-              - name: Installing cross-env npm
-                run: npm install cross-env
-            
+              - name: Install nvm
+                run: |
+                 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+                 export NVM_DIR="$HOME/.nvm"
+                 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+                 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+              - name: Use Node.js
+                run: nvm install 14
+
               - name: Setup Node.js
                 uses: actions/setup-node@v2
                 with: 
@@ -48,9 +52,7 @@ jobs:
               - name: Install Dependencies
                 run: npm install 
 
-              - name: Installing react
-                run: npm i react-scripts
-              
+               
               # - name: Build the app
               #   run: npm run build
 
